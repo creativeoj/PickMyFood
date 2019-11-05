@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html class="FontClass" lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container body-content bottomSpace">
+<h1 th:text="${title}" style="text-align:center;
+                               font-size: 56px;">Default Title</h1>
+
+<nav th:fragments="navigation" >
+    <a class="btn btn-secondary otherNav" href="/login/">login</a>
+    <a class="btn btn-secondary otherNav" href="/register">register</a>
+    <a class="btn btn-secondary otherNav" href="/logout">logout</a>
+
+</nav>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="collapse navbar-collapse justify-content-around" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="/locations">locations</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/item">inventory</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/search">search</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/history">history</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div id="instructionGap"></div>
+<h3 style="text-align:center">Instructions
+    PickMyFood Inventory System is a web application designed for pick-up-food station owners to keep track of their menus. Using this application you can check menu flows by locations.
+</h3>
+
+<h4>Home </h4>
+<p>	Welcome message and instruction view.</p>
+<h4>Locations</h4>
+<p>	Creating location will need to name, location number.</p>
+<h4>Menu</h4>
+<p>	Creating menu is first step in your items, it will make easy to add item quantities. Once you click "add item" you should see it immediately in you inventory. To remove a menu simply click "remove menu" which is next to the add menu button.
+    **if you remove a category, all items of that category will also be removed.</p>
+<h4>Inventory</h4>
+<p> Creating and removing items.</p>
+<h4>Search</h4>
+<p>	You can search menu by using location number. You can view location name, number, quantity, and history.</p>
+
+<h4>History</h4>
+<p>	This is useful pert of this application to keep track of every change that happens. </p>
+
+</body>
+</html>

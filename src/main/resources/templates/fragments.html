@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html class="FontClass" lang="en" xmlns:th="http://thymeleaf.org/">
+<head th:fragment="head">
+    <meta charset="UTF-8"/>
+    <title th:text="${title}">PickMyFood Inventory</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" />
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/css/main.css" />
+
+</head>
+
+<body class="container body-content">
+
+<div id="background">
+
+    <form action="/logout" method="post">
+        <button type="submit">Logout</button>
+    </form>
+
+    <nav id="mainNav" th:fragment="navigation" class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="collapse navbar-collapse justify-content-around" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="/home">home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/locations">locations</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/item">inventory</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/search">search</a>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/history">history</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>
+</body>
+</html>
