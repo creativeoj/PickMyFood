@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+
+<body class="container">
+<h1 th:text="${title} + ': Current Items'" style="text-align:center">Default Title</h1>
+<nav th:replace="fragments :: navigation"></nav>
+
+<a class="btn btn-secondary" th:href="'/locations/add-remove-item/' + ${location.id}"
+   th:text="'stock items to ' + ${location.name}"></a>
+<br/>
+
+<table class="table">
+
+    <tr>
+        <th>Item</th>
+        <th>Location #</th>
+        <th>Quantity</th>
+        <th>Edit</th>
+        <th>Remove</th>
+    </tr>
+
+    <tr th:each="item : ${items}">
+        <td th:text="${item.menu.name}"></td>
+        <td th:text="${item.number}"></td>
+        <td th:text="${item.other}"></td>
+        <td><a class="btn btn-secondary" th:href="@{'/item/edit/' + ${item.id}}">Edit</a></td>
+        <td><a class="btn btn-secondary" th:href="@{'/locations/remove-item-from-location/' + *{location.id} + '/' + ${item.id}}">Return</a></td>
+    </tr>
+
+</table>
+<p th:if="${#lists.isEmpty(locations)}">No Locations.  Please input location information.</p>
+</body>
+</html>

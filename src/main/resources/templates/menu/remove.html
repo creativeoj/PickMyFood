@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+    <head th:replace="fragments :: head"></head>
+    <body class="container">
+
+        <h1 th:text="${title}" style="text-align:center">Default Title</h1>
+
+        <nav th:replace="fragments :: navigation"></nav>
+
+        <div style="color: red;">
+            <p id="warning">Note: removing a menu, it will all of inventory information delete.</p>
+        </div>
+        <table class="table">
+            <tr>
+                <th>Menu</th>
+                <th>Remove</th>
+            </tr>
+            <tr th:each="menu : ${menus}">
+                <td th:text="${menu.name}"></td>
+                <td><a class="btn btn-secondary" th:href="@{'/menu/remove-menu/' + ${menu.id}}">Remove</a></td>
+
+            </tr>
+        </table>
+
+    </body>
+</html>

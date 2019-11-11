@@ -1,17 +1,16 @@
 <!DOCTYPE html>
-<html class="FontClass" lang="en" xmlns:th="http://www.thymeleaf.org/">
+<html class="myFontClass" lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
 <body id="background" class="container body-content bottomSpace" >
 
-<h1 th:text="${title}" style="text-align:center;
-                               font-size: 56px;">Default Title</h1>
+<h1 th:text="${title}" style="text-align:center; font-size: 56px;">Default Title</h1>
 
 <nav th:fragments="navigation" >
     <a class="btn btn-secondary otherNav" href="/login/">login</a>
     <a class="btn btn-secondary otherNav" href="/register">register</a>
 </nav>
 <div id="instructionGap"></div>
-
-<h2 class="centerIt">Welcome! +${user.name} </h2>
+<h2 class="centerIt">Welcome! Please login your account!!
+    <br>If you do have account please sing-up first!  </h2>
 </body>
 </html>

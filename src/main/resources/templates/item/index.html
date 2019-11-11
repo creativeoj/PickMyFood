@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+
+<body class="container body-content">
+
+<h1 th:text="${title}">Default Title</h1>
+
+<nav th:replace="fragments :: navigation"></nav>
+
+<div class="otherNav">
+    <a class="btn btn-secondary" href="/item/add">Add Item</a>
+    <a class="btn btn-secondary" href="/menu/add">Add Menu</a>
+    <a  class="btn btn-secondary" href="/menu/remove">Remove Menu</a>
+</div>
+
+<p class="error" th:if="${#lists.isEmpty(items)}">No items, but you can add data on inventory page"</p>
+
+<div class="table box3">
+    <h4>In Stock</h4>
+    <table>
+        <tr>
+            <th>Menu</th>
+            <th>Location #</th>
+            <th>Quantity</th>
+            <th>Edit</th>
+            <th>Remove</th>
+        </tr>
+        <tr th:each="item : ${inItems}">
+            <td th:text="${item.menu.name}"></td>
+            <td>
+                <span th:if="${item.number != 0}" th:text="${item.number}"> </span>
+            </td>
+            <td th:text="${item.other}"></td>
+            <td><a class="btn btn-secondary" th:href="@{'/item/edit/' + ${item.id}}">Edit</a></td>
+            <td><a class="btn btn-secondary" th:href="@{'/item/remove-item/' + ${item.id}}">Remove</a></td>
+        </tr>
+
+    </table><p th:if="${#lists.isEmpty(inItems)}">No items in stock</p>
+</div>
+
+<div class="table box4">
+    <h4 id="moveRight">Out Of stock</h4>
+    <table>
+        <tr>
+            <th>Menu</th>
+            <th>Location #</th>
+            <th>Quantity</th>
+            <th>Edit</th>
+        </tr>
+        <tr th:each="item : ${outItems}">
+            <td th:text="${item.menu.name}"></td>
+            <td>
+                <span th:if="${item.number != 0}" th:text="${item.number}"> </span>
+            </td>
+            <td th:text="${item.other}"></td>
+            <td><a class="btn btn-secondary" th:href="@{'/item/edit/' + ${item.id}}">Edit</a></td>
+        </tr>
+
+    </table>
+
+    <p th:if="${#lists.isEmpty(outItems)}">No items out of stock</p>
+</div>
+</body>
+</html>

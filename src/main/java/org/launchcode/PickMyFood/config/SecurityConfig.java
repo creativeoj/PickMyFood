@@ -25,7 +25,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserDao userDao;
 
-
     @Autowired
     private CustomUserDetailsService userDetailsService;
 
@@ -39,18 +38,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        //Check up to put an error message if username or password is not correct
         http.csrf().disable();
         http.authorizeRequests()
-                .antMatchers("/admin/**", "/category/**", "/history/**",
-                        "/item/**", "/locations/**", "/search/**", "/login/**", "/home/**").authenticated()
+                .antMatchers("/admin/**", "/menu/**", "/histories/**",
+                        "/item/**", "/locations/**", "/search/**", "/tasks/**", "/login/**", "/home/**").authenticated()
                 .anyRequest().permitAll()
                 .and().formLogin()
-                .loginPage("/login")
-                .successForwardUrl("/home")
-                .usernameParameter("name")
-                .passwordParameter("password")
-                .permitAll();
+                    .loginPage("/login")
+                    .successForwardUrl("/home")
+                    .usernameParameter("name")
+                    .passwordParameter("password")
+                    .permitAll();
     }
 
     @Bean

@@ -34,7 +34,6 @@ public class User {
     public User(String name, String password){
         this.name = name;
         this.password = password;
-
     }
 
     public User(User user) {
@@ -45,7 +44,6 @@ public class User {
 
     }
 
-
     public Long getId() {
         return id;
     }
@@ -53,6 +51,7 @@ public class User {
     public String getPassword() {
         return password;
     }
+
     public void setPassword(String password) {
         this.password = password;
     }

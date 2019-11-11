@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container">
+
+<h1 th:text="${title}">Default Title</h1>
+
+<nav th:replace="fragments :: navigation"></nav>
+
+<p id="warning">Note: items will be moved back to inventory if the location is not safe to remove</p>
+
+<table class="table">
+    <tr>
+        <th>Name</th>
+        <th>Location #</th>
+        <th>Safe to Remove</th>
+        <th>Remove</th>
+    </tr>
+    <tr th:each="location : ${locations}">
+        <td th:text="${location.name}"></td>
+        <td th:text="${location.number}"></td>
+        <td th:text="${location.safe}"></td>
+        <td><a class="btn btn-secondary" th:href="@{'/locations/remove-location/' + ${location.id}}">Remove</a></td>
+
+    </tr>
+</table>
+
+</body>
+</html>

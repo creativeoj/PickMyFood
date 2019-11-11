@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container">
+<h2>Stock item to location: <a th:href="@{'/locations/view/' + ${form.location.id}}" th:text="${form.location.name}">Default Title</a></h2>
+<nav th:replace="fragments :: navigation"></nav>
+
+<div class="box1">
+    <h4>Items available</h4>
+    <table style="width: 700px; text-align:left; margin-left: -200px;" class="table" th:object="${form}">
+        <tr>
+            <th>Menu</th>
+            <th>Location #</th>
+            <th>Quantity</th>
+            <th>Stock Item</th>
+        </tr>
+        <tr th:each="item : *{items}">
+            <td th:text="${item.menu.name}"></td>
+            <td th:text="${item.number}"></td>
+            <td th:text="${item.other}"></td>
+            <td><a class="btn btn-secondary" th:href="@{'/locations/add-item-to-location/' + *{location.id} + '/' + ${item.id}}">Stock item</a></td>
+        </tr>
+    </table>
+</div>
+
+<br />
+
+<div class="box2">
+    <h4 id="moveRight">Items in Sold</h4>
+    <table class="table">
+        <tr>
+            <th>Menu</th>
+            <th>Location #</th>
+            <th>Quantity</th>
+            <th>Sold Item</th>
+        </tr>
+        <tr th:each="item : ${hasItems}">
+            <td th:text="${item.menu.name}"></td>
+            <td th:text="${item.number}"></td>
+            <td th:text="${item.other}"></td>
+            <td><a class="btn btn-secondary" th:href="@{'/locations/remove-item-from-location/' + ${form.location.id} + '/' + ${item.id}}">Sold item</a></td>
+        </tr>
+    </table>
+</div>
+
+</body>
+</html>

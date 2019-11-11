@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+
+<body class="container body-content">
+
+<h1 th:text="${title}" style="text-align:center">Default Title</h1>
+
+<nav th:replace="fragments :: navigation"></nav>
+
+<nav th:fragment="navigation">
+    <a class="btn btn-secondary" href="/histories/">All</a>
+    <a class="btn btn-secondary" href="/histories/menus">Menu</a>
+    <a class="btn btn-secondary" href="/histories/items">Inventory</a>
+    <a class="btn btn-secondary" href="/histories/location-items">Location item</a>
+    <a class="btn btn-secondary" href="/histories/locations">Location</a>
+    <a class="btn btn-secondary" href="/histories/tasks">Tasks</a>
+</nav>
+
+<table class="table">
+    <tr>
+        <th>Type</th>
+        <th>location</th>
+        <th>Item</th>
+        <th>Status</th>
+        <th>Date</th>
+    </tr>
+    <tr th:each="history : ${histories}">
+        <td th:text="${history.type}"></td>
+        <td th:text="${history.name}"></td>
+        <td th:text="${history.item}"></td>
+        <td th:text="${history.status}"></td>
+        <td th:text="${history.myDate}"></td>
+    </tr>
+
+</table>
+
+</body>
+</html>

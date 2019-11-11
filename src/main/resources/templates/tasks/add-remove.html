@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+
+<body class="container body-content">
+
+<h1 th:text="${title}">Default Title</h1>
+
+<nav th:replace="fragments :: navigation"></nav>
+<br />
+<h4>Completed task</h4>
+<table class="table">
+    <tr>
+        <th>Location</th>
+        <th>Remove</th>
+    </tr>
+    <tr th:each="location : ${completedLocations}">
+        <td th:text="${location.name}"></td>
+        <td><a class="btn btn-secondary" th:href="@{'/tasks/remove-task-location/' + ${location.id} + '/' + ${task.id}}">
+            Remove</a></td>
+    </tr>
+</table>
+
+<h4>Not done yet</h4>
+<table class="table">
+    <tr>
+        <th>Location</th>
+        <th>Add Complete</th>
+    </tr>
+    <tr th:each="location : ${incompleteLocations}">
+        <td th:text="${location.name}"></td>
+        <td><a class="btn btn-secondary" th:href="@{'/tasks/add-task-location/' + ${location.id} + '/' + ${task.id}}">
+            Complete</a></td>
+    </tr>
+</table>
+
+</body>
+</html>

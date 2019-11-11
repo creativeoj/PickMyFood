@@ -8,7 +8,7 @@ nav {
     text-align:center;
     font-size:24px;
     border-radius: 25px;
-    margin: 30px;
+    margin: 20px;
 }
 
 h1 {
@@ -20,6 +20,7 @@ color:red;
 }
 
 .otherNav {
+
 margin-top: 30px;
 margin-bottom: 15px;
 }

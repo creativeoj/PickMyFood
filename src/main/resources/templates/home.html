@@ -1,39 +1,52 @@
 <!DOCTYPE html>
-<html class="FontClass" lang="en" xmlns:th="http://www.thymeleaf.org/">
+<html class="myFontClass" lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
 <body class="container body-content bottomSpace">
 <h1 th:text="${title}" style="text-align:center;
                                font-size: 56px;">Default Title</h1>
 
-<nav th:fragments="navigation" >
-    <a class="btn btn-secondary otherNav" href="/login/">login</a>
-    <a class="btn btn-secondary otherNav" href="/register">register</a>
+<nav th:fragments="navigation"  style="text-align:right">
     <a class="btn btn-secondary otherNav" href="/logout">logout</a>
 
 </nav>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="collapse navbar-collapse justify-content-around" id="navbarNav">
-        <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link" href="/locations">locations</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/item">inventory</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/search">search</a>
-            </li>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="text-align:center">
+    <a class="navbar-brand" href="/home">Home</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/locations">Locations</a>
+            </li>
             <li class="nav-item">
-                <a class="nav-link" href="/history">history</a>
+                <a class="nav-link" href="/item">Inventory</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/menu">Menu</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/search">Search</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/tasks">Tasks</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/histories">Histories</a>
             </li>
         </ul>
     </div>
 </nav>
+
 <div id="instructionGap"></div>
-<h3 style="text-align:center">Instructions
-    PickMyFood Inventory System is a web application designed for pick-up-food station owners to keep track of their menus. Using this application you can check menu flows by locations.
+
+<h3 style="text-align:left">Instructions:</h3>
+    <p><br> PickMyFood Inventory System is a web application designed for pick-up-food station owners to keep track of their menus.
+        <br> Using this application you can task menu flows by locations.
+        <br> first of all, you need to add location information in locations, and then go inventory category and then add menu items information input.
+<br> and then you can add item information.  thank you.</p>
 </h3>
 
 <h4>Home </h4>
@@ -42,14 +55,18 @@
 <p>	Creating location will need to name, location number.</p>
 <h4>Menu</h4>
 <p>	Creating menu is first step in your items, it will make easy to add item quantities. Once you click "add item" you should see it immediately in you inventory. To remove a menu simply click "remove menu" which is next to the add menu button.
-    **if you remove a category, all items of that category will also be removed.</p>
+    **if you remove a menu, all items of that menu will also be removed.</p>
 <h4>Inventory</h4>
 <p> Creating and removing items.</p>
 <h4>Search</h4>
-<p>	You can search menu by using location number. You can view location name, number, quantity, and history.</p>
-
-<h4>History</h4>
-<p>	This is useful pert of this application to keep track of every change that happens. </p>
-
+<p>	User can search menu by using location number. You can view location name, location number, quantity, and history.</p>
+<h4>Tasks</h4>
+<p>	User can task inventory. </p>
+<br>
+<h4>Histories</h4>
+<p>	User can keep track of every change that happens. </p>
+<br>
+<br>
+<h6 style="text-align:center">Created by O.J Shin @2019 </h6>
 </body>
 </html>

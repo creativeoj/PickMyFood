@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+    <head th:replace="fragments :: head"></head>
+
+    <body class="container body-content">
+
+        <h1 th:text="${title}" style="text-align:center">Default Title</h1>
+
+        <nav th:replace="fragments :: navigation"></nav>
+        <br />
+        <a class="btn btn-secondary otherNav" href="/menu/add">Add Menu</a>
+        <a class="btn btn-secondary otherNav" href="/menu/remove">Remove Menu</a>
+        <br />
+        <br />
+        <table class="table">
+            <tr th:each="menu : ${menus}">
+                <td th:text="${menu.name}"></td>
+            </tr>
+        </table>
+
+        <p th:if="${#lists.isEmpty(menus)}">No menu, Please input menu information.</p>
+
+    </body>
+</html>
