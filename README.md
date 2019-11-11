@@ -23,3 +23,9 @@ You can search menu by using location number.  You can view location name, numbe
 History:
 This is useful pert of this application to keep track of every change that happens. 
 
+Task
+User can add and remove task. 
+
+
+
+
