@@ -1,5 +1,8 @@
 package org.launchcode.PickMyFood.controllers;
 
+/**
+ * Created by O.J SHIN
+ */
 
 import org.launchcode.PickMyFood.models.*;
 import org.launchcode.PickMyFood.models.data.HistoryDao;
@@ -102,7 +105,7 @@ public class menuController {
                 itemDao.delete(item);
             }
         }
-        Menu menu = menuDao.findById(menuId).orElse(null);
+        Menu menu = menuDao.getOne(menuId);
         Histories newHistory = new Histories("menu", menu.getName(), "removed");
         newHistory.setMyDate(newHistory.getMyDate());
         historyDao.save(newHistory);

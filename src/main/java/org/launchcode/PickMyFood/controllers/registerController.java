@@ -35,16 +35,16 @@ public class registerController {
 
     @PostMapping
 
-    public String processAddUser(@ModelAttribute @Valid User user, Errors errors, String verify,
-                                 Model model) {
+    public String processAddUser(@ModelAttribute @Valid User user, Errors errors,Model model) {
 
         if (errors.hasErrors()){
             model.addAttribute("user", user);
             model.addAttribute("title", "PickMyFood Inventory Register");
+            model.addAttribute("error", "");
             return "register/index";
         }
         for (User aUser : userDao.findAll()) {
-            if (aUser.getName().equals(user.getName())) {
+            if (aUser.getName().equals(user.getName().toLowerCase())) {
                 model.addAttribute("user", user);
                 model.addAttribute("title", "PickMyFood Inventory Register");
                 model.addAttribute("error", "That name is already in use");

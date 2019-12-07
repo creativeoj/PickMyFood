@@ -32,19 +32,17 @@ public class AddLocationItemForm {
         this.locationId = locationId;
     }
 
-    public int getItemId() {
-        return itemId;
-    }
+    public int getItemId() {  return this.itemId; }
 
     public void setItemId(int itemId) {
         this.itemId = itemId;
     }
 
     public Iterable<Item> getItems() {
-        return items;
+        return this.items;
     }
 
     public Location getLocation() {
-        return location;
+        return this.location;
     }
 }

@@ -7,12 +7,12 @@
 <h1 th:text="${title}">Default Title</h1>
 
 <nav th:replace="fragments :: navigation"></nav>
-
+<div class="otherNav">
+    <a class="btn btn-secondary" th:href="@{/search}">Search</a>
+</div>
 <h4 th:text="'Location #:' +  ${item.number} "></h4>
-<h4 th:text="'menu:' +${item.menu.name}"></h4>
+<h4 th:text="'menu name:' + ${item.menu.name}"></h4>
 <h4 th:if="${#strings.length(item.other)} > 0" th:text="'quantity: ' + ${item.other}"></h4>
-
-
 <h3 th:if="${location != null}" th:text="'item location: ' + ${location.name}"></h3>
 <h3 th:if="${location == null}">In Stock</h3>
 <br/>
@@ -21,12 +21,16 @@
 <table class="table">
     <tr>
         <th>location Item</th>
+        <th>location Name</th>
         <th>Location #</th>
+        <th>Status</th>
         <th>Date</th>
     </tr>
     <tr th:each="history : ${histories}">
         <td th:text="${history.item}"></td>
+        <td th:text="${history.name}"></td>
         <td th:text="${history.number}"></td>
+        <td th:text="${history.status}"></td>
         <td th:text="${history.myDate}"></td>
     </tr>
 </table>

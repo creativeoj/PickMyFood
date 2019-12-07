@@ -4,11 +4,19 @@
 
 <body class="container body-content">
 
-<h1 th:text="${title}">Default Title</h1>
-
 <nav th:replace="fragments :: navigation"></nav>
 <br />
-<h4>Completed task</h4>
+
+
+<h1 th:text="${title}" > Default Title</h1>
+</br>
+
+<div class="otherNav">
+    <a class="btn btn-secondary" href="/tasks/add">Add ToDo</a>
+    <a class="btn btn-secondary" href="/tasks/remove">Remove ToDo</a>
+</div>
+
+<h4>Completed ToDo</h4>
 <table class="table">
     <tr>
         <th>Location</th>

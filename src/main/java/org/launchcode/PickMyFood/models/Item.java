@@ -85,6 +85,7 @@ public class Item implements Comparable<Item>{
     public boolean isInventory() {
         return inInventory;
     }
+
     public void setisInventory(boolean in) {
         this.inInventory = in;
     }
@@ -93,9 +94,7 @@ public class Item implements Comparable<Item>{
         return locations;
     }
 
-    public void setLocations(List<Location> locations) {
-        this.locations = locations;
-    }
+    public void setLocations(List<Location> locations) { this.locations = locations; }
 
     public Long getUserId() {
         return userId;
@@ -108,7 +107,9 @@ public class Item implements Comparable<Item>{
     @Override
     public int compareTo(Item o){
         int compare = menu.getName().compareTo(o.getMenu().getName());
-      
+        if (compare == 0) {
+            compare = number.compareTo(o.getNumber());
+        }
         return compare;
     }
 

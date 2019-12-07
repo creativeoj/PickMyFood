@@ -2,20 +2,20 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
 <body class="container body-content">
-<h1 th:text="${title}">Default Title</h1>
+<h1 th:text="${title}" style="text-align:center">Default Title</h1>
 <nav th:replace="fragments :: navigation"></nav>
 <div class="otherNav">
-    <a class="btn btn-secondary" href="/tasks/add">Add task</a>
-    <a class="btn btn-secondary" href="/tasks/remove">Remove task</a>
+    <a class="btn btn-secondary" href="/tasks/add">Add ToDo</a>
+    <a class="btn btn-secondary" href="/tasks/remove">Remove ToDo</a>
 </div>
 <table class="table">
     <tr>
-        <th>Task</th>
+        <th>ToDo</th>
     </tr>
     <tr th:each="task : ${tasks}">
         <td><a th:href="@{'/tasks/add-remove-locations/' + ${task.id}}" th:text="${task.name}"></a></td>
     </tr>
 </table>
-<p th:if="${#lists.isEmpty(tasks)}">No tasks </p>
+<p th:if="${#lists.isEmpty(tasks)}">No ToDos </p>
 </body>
 </html>

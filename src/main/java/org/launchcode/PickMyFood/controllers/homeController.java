@@ -1,16 +1,15 @@
 package org.launchcode.PickMyFood.controllers;
 
+/**
+ * Created by O.J SHIN
+ */
 
-import org.launchcode.PickMyFood.models.*;
 import org.launchcode.PickMyFood.models.data.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 public class homeController {

@@ -2,16 +2,20 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
 <body class="container body-content">
-<h1 th:text="${title}">Default Title</h1>
+<h1 th:text="${title}" style="text-align:center">Default Title</h1>
 <nav th:replace="fragments :: navigation"></nav>
+
 <p th:text="${other}">default</p>
 <form method="post" style="max-width:600px;" th:object="${task}">
-    <div class="form-group">
-        <label th:for="task">Task: </label>
-        <input required="required" class="form-control" th:field="*{name}" />
-        <span th:errors="*{name}" class="error"></span>
+    <div class="otherNav">
+        <a class="btn btn-secondary" href="/tasks">ToDo List</a>
     </div>
-    <input type="submit" value="Add Task" />
+    <div class="form-group">
+        <h2 th:for="task" >Adding ToDo: </h2>
+        <input required="required" class="form-control" th:field="*{name}" />
+        <span th:errors="*{name}" class="error" ></span>
+    </div>
+    <input type="submit" value="Add ToDo" />
 </form>
 </body>
 </html>

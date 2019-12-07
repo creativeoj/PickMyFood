@@ -1,7 +1,5 @@
 package org.launchcode.PickMyFood.models;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.ManyToMany;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -11,13 +9,13 @@ import java.util.List;
 @Entity
 public class Task {
 
-    @Id //JPA annotations
+    @Id
     @GeneratedValue
     private int id;
 
     @NotNull
     @Size(min = 1, max = 500)
-    private static String name;
+    private String name;
 
     private Long userId;
 

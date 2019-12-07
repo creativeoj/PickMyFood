@@ -1,4 +1,7 @@
 package org.launchcode.PickMyFood.controllers;
+/**
+ * Created by O.J SHIN
+ */
 
 
 import org.launchcode.PickMyFood.models.*;
@@ -47,25 +50,22 @@ public class searchController {
     }
 
     @RequestMapping(value = "", method = RequestMethod.POST)
-    public String processSearch(@ModelAttribute @Valid SearchItemForm searchItemForm,
-                                Errors errors,
-                                Model model,
-                                @RequestParam int menuId,
-                                Authentication authentication) {
+    public String processSearch(@ModelAttribute @Valid SearchItemForm searchItemForm, Errors errors, Model model,@RequestParam int menuId, Authentication authentication) {
 
         if (errors.hasErrors()){
             model.addAttribute("title", "PickMyFood Search");
             model.addAttribute("item", searchItemForm);
             model.addAttribute("error", "");
-            model.addAttribute("menus",
-                    menuDao.findAllByUserId(((User)authentication.getPrincipal()).getId()));
+            model.addAttribute("menus", menuDao.findAllByUserId(((User)authentication.getPrincipal()).getId()));
             return "redirect:/search/index";
+
         }
 
-        Menu cat = menuDao.findById(menuId).orElse(null);;
+        Menu cat = menuDao.getOne(menuId);
         SearchItemForm newSearchItemForm = new SearchItemForm(searchItemForm.getNumber());
 
         for (Item aItem : itemDao.findAllByUserId(((User)authentication.getPrincipal()).getId())){
+
             if(aItem.getMenu().getName() != null && cat.getName() != null) {
                 if (aItem.getMenu().getName().equals(cat.getName())) {
                     if(aItem.getNumber() != null && newSearchItemForm.getNumber() != null) {
@@ -77,18 +77,26 @@ public class searchController {
             }
         }
 
-        model.addAttribute("error", "sorry, we could'nt find that item or it does not exist");
+
+        if (newSearchItemForm.getNumber() == null){
+            model.addAttribute("error1", "Sorry, input Location Number");
+            model.addAttribute("title", "PickMyFood Search");
+            model.addAttribute("item", searchItemForm);
+            model.addAttribute("menus",menuDao.findAllByUserId(((User)authentication.getPrincipal()).getId()));
+            return "search/index";
+        }
+
+        model.addAttribute("error", "sorry, we couldn't find that item or it does not exist");
         model.addAttribute("title", "PickMyFood Search");
         model.addAttribute("item", searchItemForm);
-        model.addAttribute("menus",
-                menuDao.findAllByUserId(((User)authentication.getPrincipal()).getId()));
+        model.addAttribute("menus",menuDao.findAllByUserId(((User)authentication.getPrincipal()).getId()));
         return "search/index";
 
     }
 
     @RequestMapping(value = "/view/{itemId}")
     public String searchView(Model model, @PathVariable int itemId, Authentication authentication) {
-        Item item = itemDao.findById(itemId).orElse(null);;
+        Item item = itemDao.getOne(itemId);
         ArrayList<Histories> histories = new ArrayList<>();
 
         for (Location location : locationDao.findAllByUserId(((User)authentication.getPrincipal()).getId())) {
@@ -105,6 +113,7 @@ public class searchController {
                     if(history.getNumber() != null ) {
                         if (history.getNumber().equals(item.getNumber())) {
                             histories.add(history);
+
                         }
                     }
                 }

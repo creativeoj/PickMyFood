@@ -14,16 +14,18 @@ public class SearchItemForm {
     @NotNull
     private Integer number;
 
+    public SearchItemForm() {}
+
     public SearchItemForm(Integer number){
         this.number = number;
     }
 
     public int getId() {
-        return id;
+        return this.id;
     }
 
     public Integer getNumber() {
-        return number;
+        return this.number;
     }
 
     public void setNumber(Integer number) {

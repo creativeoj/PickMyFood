@@ -18,7 +18,7 @@
             <td th:text="${item.menu.name}"></td>
             <td th:text="${item.number}"></td>
             <td th:text="${item.other}"></td>
-            <td><a class="btn btn-secondary" th:href="@{'/locations/add-item-to-location/' + *{location.id} + '/' + ${item.id}}">Stock item</a></td>
+            <td><a class="btn btn-secondary" th:href="@{'/locations/add-item-to-location/' + *{location.id} + '/' + ${item.id}}">Stock</a></td>
         </tr>
     </table>
 </div>
@@ -26,7 +26,7 @@
 <br />
 
 <div class="box2">
-    <h4 id="moveRight">Items in Sold</h4>
+    <h4 id="moveRight">Items in stock</h4>
     <table class="table">
         <tr>
             <th>Menu</th>
@@ -38,7 +38,7 @@
             <td th:text="${item.menu.name}"></td>
             <td th:text="${item.number}"></td>
             <td th:text="${item.other}"></td>
-            <td><a class="btn btn-secondary" th:href="@{'/locations/remove-item-from-location/' + ${form.location.id} + '/' + ${item.id}}">Sold item</a></td>
+            <td><a class="btn btn-secondary" th:href="@{'/locations/remove-item-from-location/' + ${form.location.id} + '/' + ${item.id}}">Return</a></td>
         </tr>
     </table>
 </div>

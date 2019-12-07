@@ -11,18 +11,17 @@ import javax.persistence.ManyToMany;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Location implements Comparable<Location> {
+public class Location  implements Comparable<Location>{
 
     @Id
     @GeneratedValue
     private int id;
 
-    @NotNull(message = "location muse have a name")
+    @NotNull(message = "location must have a name")
     private String name;
 
     @NotNull(message = "location must have a location number")

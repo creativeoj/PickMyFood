@@ -8,6 +8,7 @@ package org.launchcode.PickMyFood.controllers;
 import org.launchcode.PickMyFood.models.User;
 import org.launchcode.PickMyFood.models.data.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -39,41 +40,15 @@ public class loginController {
 
 
     @GetMapping
-    public String index(Model model) {
+    public String index(@ModelAttribute @Valid User user, Errors errors,  Model model, Authentication authentication) {
+
         model.addAttribute("user", new User());
         model.addAttribute("title", "PickMyFood Inventory Login");
 
         return "login/index";
-
     }
-
     @PostMapping
     public String processLogin(){
         return "redirect:/home";
     }
-
-/*
-    public String processLogin(@ModelAttribute @Valid User user, Errors errors,
-                               Model model) {
-        if (errors.hasErrors()) {
-
-            model.addAttribute("error", "Username does not exist.  please register first!");
-            model.addAttribute("user", user);
-            model.addAttribute("title", "PickMyFood Inventory Login");
-            return "login/index";
-        }
-        for (User User : userDao.findAll()) {
-
-            if (User.getName() != (user.getPassword())) || () {
-                model.addAttribute("error", "Password not match with your account. Please try again");
-                model.addAttribute("user", user);
-                model.addAttribute("title", "PickMyFood Inventory Login");
-                return "login/index";
-            }
-        }
-
-
-        return "redirect:/home";
-
-    }*/
 }

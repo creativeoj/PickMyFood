@@ -1,20 +1,21 @@
 package org.launchcode.PickMyFood.controllers;
+/**
+ * Created by O.J SHIN
+ */
 
 import org.launchcode.PickMyFood.models.Histories;
+import org.launchcode.PickMyFood.models.Item;
 import org.launchcode.PickMyFood.models.Menu;
 import org.launchcode.PickMyFood.models.User;
-import org.launchcode.PickMyFood.models.Item;
 import org.launchcode.PickMyFood.models.data.HistoryDao;
 import org.launchcode.PickMyFood.models.data.ItemDao;
 import org.launchcode.PickMyFood.models.data.MenuDao;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -40,8 +41,7 @@ public class itemController {
         ArrayList<Item> outItems = new ArrayList<>();
         List<Item> items = new ArrayList<>();
 
-        for (Item item : //itemDao.findAllByUserId(((User)authentication.getPrincipal()).getId())) {
-            itemDao.findAllByUserId(((User)authentication.getPrincipal()).getId())){
+        for (Item item : itemDao.findAllByUserId(((User)authentication.getPrincipal()).getId())){
             items.add(item);
         }
         Collections.sort(items);
@@ -72,32 +72,25 @@ public class itemController {
     }
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
-    public String processAddItem(Model model,
-                                 @ModelAttribute @Valid Item item,
-                                 Errors errors,
-                                 @RequestParam int menuId,
-                                 Authentication authentication){
+    public String processAddItem(Model model, @ModelAttribute @Valid Item item, Errors errors, @RequestParam int menuId, Authentication authentication){
         if(errors.hasErrors()) {
             model.addAttribute("title", "PickMyFood Add Item");
-            model.addAttribute("menus",
-                    menuDao.findAllByUserId(((User)authentication.getPrincipal()).getId()));
+            model.addAttribute("menus",menuDao.findAllByUserId(((User)authentication.getPrincipal()).getId()));
             model.addAttribute("error", "");
             return "/item/add";
         }
 
 
-        Menu cat = menuDao.findById(menuId).orElse(null);
+        Menu cat = menuDao.getOne(menuId);
         Item newItem = new Item(cat, item.getNumber(), item.getOther(),
                 ((User) authentication.getPrincipal()).getId());
 
         for (Item aItem : itemDao.findAllByUserId(((User)authentication.getPrincipal()).getId())){
-            if (aItem.getMenu().getName().equals(newItem.getMenu().getName())){
+            if (aItem.getMenu().getName().equals(newItem.getMenu().getName().toLowerCase())){
                 if(aItem.getNumber().equals(newItem.getNumber())){
                     model.addAttribute("title", "PickMyFood Add Item");
-                    model.addAttribute("menus",
-                            menuDao.findAllByUserId(((User)authentication.getPrincipal()).getId()));
-                    model.addAttribute("error",
-                            "an item of that menu and number already exists");
+                    model.addAttribute("menus", menuDao.findAllByUserId(((User)authentication.getPrincipal()).getId()));
+                    model.addAttribute("error","an item of that menu and number already exists");
                     return "/item/add";
                 }
             }
@@ -112,7 +105,7 @@ public class itemController {
 
     @RequestMapping(value = "remove-item/{itemId}")
     public String processRemoveItems(@PathVariable int itemId, Authentication authentication) {
-        Item item = itemDao.findById(itemId).orElse(null);
+        Item item = itemDao.getOne(itemId);
         Histories newHistory = new Histories("item", item.getMenu().getName(),
                 "removed", item.getNumber());
         newHistory.setMyDate(newHistory.getMyDate());
@@ -125,7 +118,7 @@ public class itemController {
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     public String displayEditForm( Model model, @PathVariable int id, Authentication authentication) {
 
-        Item item = itemDao.findById(id).orElse(null);;
+        Item item = itemDao.getOne(id);
         model.addAttribute(item);
         model.addAttribute("menus",
                 menuDao.findAllByUserId(((User)authentication.getPrincipal()).getId()));
@@ -137,7 +130,7 @@ public class itemController {
     public String processEditForm(@RequestParam int id,
                                   @ModelAttribute @Valid Item newItem,
                                   Errors errors, Model model, Authentication authentication) {
-        Item aItem = itemDao.findById(id).orElse(null);;
+        Item aItem = itemDao.getOne(id);;
 
         if (errors.hasErrors()) {
             model.addAttribute(aItem);

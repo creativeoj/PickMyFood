@@ -2,19 +2,19 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
 <body class="container body-content">
-<h1 th:text="${title}">Default Title</h1>
+<h1 th:text="${title}"style="text-align:center">Default Title</h1>
 <nav th:replace="fragments :: navigation"></nav>
 <div class="otherNav">
-    <a class="btn btn-secondary" href="/tasks">PickMyFood Inventory Tasks</a>
+    <a class="btn btn-secondary" href="/tasks">ToDo List</a>
 </div>
 <table class="table">
     <tr>
-        <th>Task</th>
-        <th>Remove Task</th>
+        <th>ToDo</th>
+        <th>Remove ToDo</th>
     </tr>
     <tr th:each="task : ${tasks}">
         <td><a th:href="@{'/tasks/add-remove-locations/' + ${task.id}}" th:text="${task.name}"></a></td>
-        <td><a class="btn btn-secondary" th:href="@{'/tasks/remove/' + ${task.id}}">Remove task</a></td>
+        <td><a class="btn btn-secondary" th:href="@{'/tasks/remove/' + ${task.id}}">Remove ToDo</a></td>
     </tr>
 </table>
 </body>

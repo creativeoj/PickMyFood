@@ -1,4 +1,7 @@
 package org.launchcode.PickMyFood.controllers;
+/**
+ * Created by O.J SHIN
+ */
 
 import org.launchcode.PickMyFood.models.Histories;
 import org.launchcode.PickMyFood.models.Location;
@@ -43,7 +46,7 @@ public class taskController {
     }
 
     @RequestMapping(value = "add")
-    public String add(Model model) {
+    public String add(Model model, Authentication authentication) {
         Task task = new Task();
         model.addAttribute("title", "PickMyFood Add Task");
         model.addAttribute("task", task);
@@ -79,7 +82,7 @@ public class taskController {
 
     @RequestMapping(value = "remove/{taskId}")
     public String processRemoveTask(@PathVariable int taskId, Authentication authentication) {
-        Task task = taskDao.findById(taskId).orElse(null);
+        Task task = taskDao.getOne(taskId);
         for (Location location : locationDao.findAll()) {
             for (Task aTask : location.getTasks()) {
                 if (aTask.getName().equals(task.getName())) {
@@ -101,7 +104,7 @@ public class taskController {
 
     @RequestMapping(value = "add-remove-locations/{taskId}")
     public String addRemoveTask(@PathVariable int taskId, Model model, Authentication authentication) {
-        Task task = taskDao.findById(taskId).orElse(null);
+        Task task = taskDao.getOne(taskId);
         ArrayList<Location> completedLocations = new ArrayList<>();
         ArrayList<Location> incompleteLocations = new ArrayList<>();
 
@@ -127,12 +130,11 @@ public class taskController {
 
     @RequestMapping(value = "add-task-location/{locationId}/{taskId}")
     public String addTaskLocation(@PathVariable int locationId, @PathVariable int taskId, Authentication authentication) {
-        Location location = locationDao.findById(locationId).orElse(null);
-        Task task = taskDao.findById(taskId).orElse(null);
+        Location location = locationDao.getOne(locationId);
+        Task task = taskDao.getOne(taskId);
         location.addTask(task);
         locationDao.save(location);
-        Histories newHistory = new Histories("task",task.getName(),
-                "completed");
+        Histories newHistory = new Histories("task",task.getName(), "completed");
         newHistory.setName(location.getName());
         newHistory.setUserId(((User)authentication.getPrincipal()).getId());
         historyDao.save(newHistory);
@@ -142,8 +144,8 @@ public class taskController {
 
     @RequestMapping(value = "remove-task-location/{locationId}/{taskId}")
     public String removeTaskLocation(@PathVariable int locationId, @PathVariable int taskId, Authentication authentication){
-        Location location = locationDao.findById(locationId).orElse(null);
-        Task task = taskDao.findById(taskId).orElse(null);
+        Location location = locationDao.getOne(locationId);
+        Task task = taskDao.getOne(taskId);
         location.removeTask(task);
         locationDao.save(location);
         Histories newHistory = new Histories("task", task.getName(),

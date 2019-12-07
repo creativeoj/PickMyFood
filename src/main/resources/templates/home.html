@@ -31,7 +31,7 @@
                 <a class="nav-link" href="/search">Search</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/tasks">Tasks</a>
+                <a class="nav-link" href="/tasks">Todo</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/histories">Histories</a>
@@ -41,13 +41,20 @@
 </nav>
 
 <div id="instructionGap"></div>
-
+<tr th:each="user : ${users}">
+    <td th:text="${user.username} + ' Date joined: ' + ${user.myDate}"></td>
+    <br />
+</tr>
 <h3 style="text-align:left">Instructions:</h3>
     <p><br> PickMyFood Inventory System is a web application designed for pick-up-food station owners to keep track of their menus.
         <br> Using this application you can task menu flows by locations.
         <br> first of all, you need to add location information in locations, and then go inventory category and then add menu items information input.
 <br> and then you can add item information.  thank you.</p>
 </h3>
+<tr th:each="user : ${users}">
+    <td th:text="${user.username} + ' Date joined: ' + ${user.myDate}"></td>
+    <br />
+</tr>
 
 <h4>Home </h4>
 <p>	Welcome message and instruction view.</p>
@@ -60,14 +67,12 @@
 <p> Creating and removing items.</p>
 <h4>Search</h4>
 <p>	User can search menu by using location number. You can view location name, location number, quantity, and history.</p>
-<h4>Tasks</h4>
-<p>	User can task inventory. </p>
+<h4>Todo</h4>
+<p>	User can add and remove todo list for inventory. </p>
 <br>
 <h4>Histories</h4>
 <p>	User can keep track of every change that happens. </p>
 <br>
-<h4>Task</h4>
-<p>	User can add and remove task. </p>
 <br>
 <br>
 <h6 style="text-align:center">Created by O.J Shin @2019 </h6>

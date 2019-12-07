@@ -2,10 +2,10 @@ package org.launchcode.PickMyFood.controllers;
 
 
 import org.launchcode.PickMyFood.models.*;
-import org.launchcode.PickMyFood.models.data.TaskDao;
 import org.launchcode.PickMyFood.models.data.HistoryDao;
 import org.launchcode.PickMyFood.models.data.ItemDao;
 import org.launchcode.PickMyFood.models.data.LocationDao;
+import org.launchcode.PickMyFood.models.data.TaskDao;
 import org.launchcode.PickMyFood.models.forms.AddLocationItemForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -37,7 +37,8 @@ public class locationController {
     @Autowired
     private ItemDao itemDao;
 
-    @Autowired HistoryDao historyDao;
+    @Autowired
+    HistoryDao historyDao;
 
     @Autowired
     private TaskDao taskDao;
@@ -71,30 +72,39 @@ public class locationController {
             model.addAttribute("error", "");
             return "locations/add";
         }
+        //if user input same location name and location number, it will get error message and redirect.
+        for (Location aLocation : locationDao.findAllByUserId(((User) authentication.getPrincipal()).getId())) {
 
-        for (Location aLocation : locationDao.findAllByUserId(((User)authentication.getPrincipal()).getId())){
-            if(location.getNumber() == aLocation.getNumber()){
-                model.addAttribute("error", "a location already has that number");
+            if (location.getNumber() == aLocation.getNumber()) {
+                model.addAttribute("error_2", "A location already has that number");
                 model.addAttribute("title", "PickMyFood Add Location");
+
+                return "locations/add";
+            }
+            if (aLocation.getName().equals(location.getName().toLowerCase())) {
+                model.addAttribute("error_1", "That name is already in use");
+                model.addAttribute("title", "PickMyFood Add Location");
+
                 return "locations/add";
             }
         }
-        location.setName(location.getName().toLowerCase());
-        location.setUserId(((User)authentication.getPrincipal()).getId());
-        locationDao.save(location);
-        Histories newHistory = new Histories("locations", location.getName(), "",
-                "added", location.getNumber());
-        newHistory.setUserId(((User)authentication.getPrincipal()).getId());
-        historyDao.save(newHistory);
-        return "redirect:/locations/view/" + location.getId();
+
+            location.setName(location.getName().toLowerCase());
+            location.setUserId(((User) authentication.getPrincipal()).getId());
+            locationDao.save(location);
+            Histories newHistory = new Histories("locations", location.getName(), "",
+                    "added", location.getNumber());
+            newHistory.setUserId(((User) authentication.getPrincipal()).getId());
+            historyDao.save(newHistory);
+            return "redirect:/locations/view/" + location.getId();
     }
 
     @RequestMapping(value = "view/{locationId}")
     public String viewLocation(Model model, @PathVariable int locationId) {
 
-        //Optional<Location> location = locationDao.findById(locationId);
+        //Optional<Location> location = locationDao.getId(locationId);
         //Location location = locationDao.findOne(locationId);
-        Location location = locationDao.findById(locationId).orElse(null);
+        Location location = locationDao.getOne(locationId);
 
         model.addAttribute("title", location.getName());
         model.addAttribute("items", location.getItems());
@@ -104,7 +114,7 @@ public class locationController {
 
     @RequestMapping(value = "add-remove-item/{locationId}")
     public String addLocationItem(Model model, @PathVariable int locationId, Authentication authentication) {
-        Location location = locationDao.findById(locationId).orElse(null);
+        Location location = locationDao.getOne(locationId);
         Iterable<Item> items = itemDao.findAllByUserId(((User)authentication.getPrincipal()).getId());
         ArrayList<Item> itemsIn = new ArrayList<>();
         for(Item item : items) {
@@ -139,7 +149,7 @@ public class locationController {
 
     @RequestMapping(value = "remove-location/{locationId}")
     public String processRemoveItems(@PathVariable int locationId, Authentication authentication) {
-        Location location = locationDao.findById(locationId).orElse(null);
+        Location location = locationDao.getOne(locationId);
         for(Item item : location.getItems()){
             item.setisInventory(true);
 
@@ -156,8 +166,8 @@ public class locationController {
     @RequestMapping(value = "remove-item-from-location/{locationId}/{itemId}", method = RequestMethod.GET)
     public String removeItemfromLocation(@PathVariable int locationId, @PathVariable int itemId,
                                        Authentication authentication) {
-        Location theLocation = locationDao.findById(locationId).orElse(null);
-        Item theItem = itemDao.findById(itemId).orElse(null);
+        Location theLocation = locationDao.getOne(locationId);
+        Item theItem = itemDao.getOne(itemId);
         theLocation.removeItem(theItem);
         theItem.setisInventory(true);
         locationDao.save(theLocation);
@@ -173,8 +183,8 @@ public class locationController {
     @RequestMapping(value = "add-item-to-location/{locationId}/{itemId}")
     public String addItemtoLocation(@PathVariable int locationId, @PathVariable int itemId, Authentication authentication) {
 
-        Location theLocation = locationDao.findById(locationId).orElse(null);
-        Item theItem = itemDao.findById(itemId).orElse(null);
+        Location theLocation = locationDao.getOne(locationId);
+        Item theItem = itemDao.getOne(itemId);
         theItem.setisInventory(false);
         theLocation.addItem(theItem);
         locationDao.save(theLocation);
@@ -185,7 +195,7 @@ public class locationController {
         historyDao.save(newHistory);
 
         return "redirect:/locations/add-remove-item/" + locationId;
-    }
+    }/// only one item you can't duplicate
 
     @RequestMapping(value = "task")
     public String displayTasks(Model model, Authentication authentication) {

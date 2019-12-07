@@ -1,31 +1,37 @@
 #PickMyFood mady by Okjin Shin 2019
 
-PickMyFood Inventory System is a web application designed for pick-up-food station owners to keep track of their menus.
-Using this application you can check menu flows by locations. 
-
-Home: 
-Welcome message and instruction view. 
-
+PickMyFood Inventory System is a web application designed for pick-up-food station owners to keep track of their menus.  
+Using this application, a user can check menu or product flows by locations, item and so on. 
+A user can be able to create an account and edit items, menu, to-do lists.  
+ 
+## Features
+-User Sign up: A user can create a new profile, allowing him or her to track inventory flows.
+ 
+-User Login: A user can login after creating a profile. Password will be hashed and salted.
+ 
+-User Home: A user will see welcome message and instruction.
+ 
 Locations:
-Creating location will need to name, location number, 
-
+Creating and removing location would require location name and location number.
+ 
 Menu:
-Creating menu is first step in your items, it will make easy to add item quantities.  Once you click "add item" you should see it immediately in you inventory.
-To remove a menu simply click "remove menu" which is next to the add menu button.  
-**if you remove a category, all items of that category will also be removed.
-
+Creating a menu will make it easy to add items. Once you click "add item" you should see it in you inventory immediately.
+To remove a menu, a user can simply click "remove menu" next to the add menu button.  
+**if you remove a menu, all items of that menu will also be removed.
+ 
 Inventory:
-Creating and removing items.  
-
+Edit, Create, and Delete items. A user can create new items to track inventory flows.  It will help to manage the entire items in the store.
+ 
 Search:
-You can search menu by using location number.  You can view location name, number, quantity, and history. 
-
+A user can view the inventory flows by searching by each location or an item.  
+ 
 History:
-This is useful pert of this application to keep track of every change that happens. 
-
-Task
-User can add and remove task. 
-
+Every time you add a location, remove a menu, this application logs history of the change.
+A user can sort those changes by different categories.  
+ToDo:
+A user can add and remove text to-do lists on a daily basis.
+ 
+ 
 
 
 
