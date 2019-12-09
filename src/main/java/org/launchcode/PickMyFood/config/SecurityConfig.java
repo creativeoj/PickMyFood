@@ -49,6 +49,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .usernameParameter("name")
                     .passwordParameter("password")
                     .permitAll();
+
     }
 
     @Bean

@@ -4,11 +4,11 @@
 <body class="container body-content">
 <h1 th:text="${title}" style="text-align:center">Default Title</h1>
 <nav th:replace="fragments :: navigation"></nav>
-
-<form method="post" style="test-align:center max-width:600px;" th:object="${item}">
+<form method="post" style="text-align:center max-width:600px;" th:object="${item}">
 
 
     <div class="form-group">
+        <p class="error" th:if="${#lists.isEmpty(menus)}">you can't search for items if there are none </p>
         <label th:for="menu">Menu</label>
         <select th:name="menuId">
             <option th:each="menu : ${menus}"
@@ -19,12 +19,10 @@
     <div class="form-group">
         <label th:for="item">Location #</label>
         <input class="form-control" th:field="*{number}" />
-        <span th:errors="*{number}" class="error"></span>
     </div>
     <p id="error" th:text="${error}"></p>
-    <input type="submit" value="Search Item" />
 
-    </div>
+    <input type="submit" value="Search Item" />
 
 </form>
 

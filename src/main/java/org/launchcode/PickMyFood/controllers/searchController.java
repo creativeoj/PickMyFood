@@ -53,11 +53,12 @@ public class searchController {
     public String processSearch(@ModelAttribute @Valid SearchItemForm searchItemForm, Errors errors, Model model,@RequestParam int menuId, Authentication authentication) {
 
         if (errors.hasErrors()){
-            model.addAttribute("title", "PickMyFood Search");
+
+            model.addAttribute("title", "PickMyFood Search Items Error");
             model.addAttribute("item", searchItemForm);
-            model.addAttribute("error", "");
+            model.addAttribute("error", "Please enter number only! No Empty, No String");
             model.addAttribute("menus", menuDao.findAllByUserId(((User)authentication.getPrincipal()).getId()));
-            return "redirect:/search/index";
+            return "search/index";
 
         }
 
@@ -67,7 +68,7 @@ public class searchController {
         for (Item aItem : itemDao.findAllByUserId(((User)authentication.getPrincipal()).getId())){
 
             if(aItem.getMenu().getName() != null && cat.getName() != null) {
-                if (aItem.getMenu().getName().equals(cat.getName())) {
+                if (aItem.getMenu().getName().equals(cat.getName() ))  {
                     if(aItem.getNumber() != null && newSearchItemForm.getNumber() != null) {
                         if (aItem.getNumber().equals(newSearchItemForm.getNumber())) {
                             return "redirect:/search/view/" + aItem.getId();
@@ -77,21 +78,11 @@ public class searchController {
             }
         }
 
-
-        if (newSearchItemForm.getNumber() == null){
-            model.addAttribute("error1", "Sorry, input Location Number");
-            model.addAttribute("title", "PickMyFood Search");
-            model.addAttribute("item", searchItemForm);
-            model.addAttribute("menus",menuDao.findAllByUserId(((User)authentication.getPrincipal()).getId()));
-            return "search/index";
-        }
-
         model.addAttribute("error", "sorry, we couldn't find that item or it does not exist");
-        model.addAttribute("title", "PickMyFood Search");
+        model.addAttribute("title", "PickMyFood Search Items Error");
         model.addAttribute("item", searchItemForm);
-        model.addAttribute("menus",menuDao.findAllByUserId(((User)authentication.getPrincipal()).getId()));
+        model.addAttribute("menus", menuDao.findAllByUserId(((User) authentication.getPrincipal()).getId()));
         return "search/index";
-
     }
 
     @RequestMapping(value = "/view/{itemId}")
