@@ -5,17 +5,18 @@
 <h1 th:text="${title}" style="text-align:center">Default Title</h1>
 <nav th:replace="fragments :: navigation"></nav>
 <div class="otherNav">
-    <a class="btn btn-secondary" href="/tasks/add">Add ToDo</a>
-    <a class="btn btn-secondary" href="/tasks/remove">Remove ToDo</a>
+    <a class="btn btn-secondary" href="/tasks/add">Add List</a>
+    <a class="btn btn-secondary" href="/tasks/remove">Remove List</a>
 </div>
 <table class="table">
     <tr>
-        <th>ToDo</th>
+        <th>ToDo List</th>
     </tr>
     <tr th:each="task : ${tasks}">
         <td><a th:href="@{'/tasks/add-remove-locations/' + ${task.id}}" th:text="${task.name}"></a></td>
     </tr>
+
 </table>
-<p th:if="${#lists.isEmpty(tasks)}">No ToDos </p>
+<p th:if="${#lists.isEmpty(tasks)}">No ToDo Lists </p>
 </body>
 </html>

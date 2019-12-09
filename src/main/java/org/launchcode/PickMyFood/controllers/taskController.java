@@ -39,7 +39,7 @@ public class taskController {
 
     @RequestMapping(value = "")
     public String index(Model model, Authentication authentication) {
-        model.addAttribute("title", "PickMyFood Tasks");
+        model.addAttribute("title", "PickMyFood Todo Lists");
         model.addAttribute("tasks", taskDao.findAllByUserId(((User)authentication.getPrincipal()).getId()));
 
         return "tasks/index";
@@ -48,7 +48,7 @@ public class taskController {
     @RequestMapping(value = "add")
     public String add(Model model, Authentication authentication) {
         Task task = new Task();
-        model.addAttribute("title", "PickMyFood Add Task");
+        model.addAttribute("title", "PickMyFood Add Todo List");
         model.addAttribute("task", task);
 
         return "tasks/add";
@@ -58,7 +58,7 @@ public class taskController {
     public String processAddForm(@ModelAttribute @Valid Task task, Errors errors, Model model,
                                  Authentication authentication) {
         if (errors.hasErrors()) {
-            model.addAttribute("title", "PickMyFood Tasks");
+            model.addAttribute("title", "PickMyFood Todo Lists");
             model.addAttribute("task", task);
             return "tasks/add";
         }
@@ -74,7 +74,7 @@ public class taskController {
 
     @RequestMapping(value = "/remove")
     public String remove(Model model, Authentication authentication) {
-        model.addAttribute("title", "PickMyFood Tasks");
+        model.addAttribute("title", "PickMyFood Todo Lists");
         model.addAttribute("tasks", taskDao.findAllByUserId(((User)authentication.getPrincipal()).getId()));
 
         return "tasks/remove";

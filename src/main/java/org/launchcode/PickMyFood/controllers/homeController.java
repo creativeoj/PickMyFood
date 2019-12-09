@@ -7,6 +7,8 @@ package org.launchcode.PickMyFood.controllers;
 import org.launchcode.PickMyFood.models.data.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,6 +45,10 @@ public class homeController {
     public String home(Model model, Authentication authentication) {
 
         model.addAttribute("title", "PickMyFood Inventory");
+        SecurityContext context = SecurityContextHolder.getContext();
+
+        model.addAttribute("message", "Welcome! Your're logged as: "
+                + context.getAuthentication().getName());
 
         return "home";
     }

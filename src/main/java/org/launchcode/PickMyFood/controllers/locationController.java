@@ -200,7 +200,7 @@ public class locationController {
     @RequestMapping(value = "task")
     public String displayTasks(Model model, Authentication authentication) {
         model.addAttribute("tasks", taskDao.findAllByUserId(((User)authentication.getPrincipal()).getId()));
-        model.addAttribute("title", "PickMyFood Tasks");
+        model.addAttribute("title", "PickMyFood Todo Lists");
 
         return "locations/tasks";
     }

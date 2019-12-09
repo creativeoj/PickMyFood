@@ -41,9 +41,9 @@
 </nav>
 
 <div id="instructionGap"></div>
-<tr th:each="user : ${users}">
-    <td th:text="${user.username} + ' Date joined: ' + ${user.myDate}"></td>
-    <br />
+
+<h3 id="message" style="color:blue" th:text="${message}"></h3>
+<br>
 </tr>
 <h3 style="text-align:left">Instructions:</h3>
     <p><br> PickMyFood Inventory System is a web application designed for pick-up-food station owners to keep track of their menus.
